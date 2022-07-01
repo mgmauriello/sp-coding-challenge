@@ -1,14 +1,24 @@
 =begin
 for create: return all appointments in the appt contraoller
-need to create new appt where there is a patient, dr, starttime, dur
-find patient/dr where their name meets parameters of patient
-save appt through render json if error status 401
+  need to create new appt where there is a patient, dr, starttime, dur
+  find patient/dr where their name meets parameters of patient
+  save appt through render json if error status 401
+for filter: if past == 1, return the key [:past] appts where the
+  appt start time less than the point of origin at the current time
+  if past == 0, return future appts where the appt start time
+    greater than the point of origin at the current time
 =end
 class Api::AppointmentsController < ApplicationController
   def index
     # TODO: return all values
-    @appointment = Appointment.all
-    render json: @appointment
+    if params[:past] === 1
+      @appointments = Appointment.where("start_time < ?", Time.zone.now)
+    elsif params [:past] === 0
+      @appointments = Appointment.where("start_time > ?", Time.zone.now)
+    else
+      @appointment = Appointment.all
+      render json: @appointment
+    end
     # TODO: return filtered values
   end
 
