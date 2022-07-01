@@ -4,6 +4,8 @@
 # -3. Each patient should have 10 appointments (5 in the past, 5 in the future)
 #   -3.5 Each appointment should be 50 minutes in duration
 
+require 'faker'
+
 Doctor.destroy_all
 Patient.destroy_all
 Appointment.destroy_all
