@@ -10,7 +10,6 @@ for filter: if past == 1, return the key [:past] appts where the
 =end
 class Api::AppointmentsController < ApplicationController
   def index
-    # TODO: return all values
     if params[:past] === 1
       @appointments = Appointment.where("start_time < ?", Time.zone.now)
     elsif params [:past] === 0
@@ -19,7 +18,11 @@ class Api::AppointmentsController < ApplicationController
       @appointment = Appointment.all
       render json: @appointment
     end
-    # TODO: return filtered values
+
+  end
+
+  def show
+    render json: @appointment
   end
 
   def create
@@ -30,9 +33,9 @@ class Api::AppointmentsController < ApplicationController
       duration_in_minutes: params[:duration_in_minutes]
     )
     if @appointment.save
-      render json: @appointment
+      render json: @appointment, status: :created, location: @appointment
     else
-      render json: {status: 401}
+      render json: @appointment.errors, status: :unprocessable_entity
     end
   end
 end
