@@ -1,15 +1,15 @@
 =begin
-return all appointments in the appt contraoller
+for create: return all appointments in the appt contraoller
 need to create new appt where there is a patient, dr, starttime, dur
 find patient/dr where their name meets parameters of patient
-
 save appt through render json if error status 401
 =end
 class Api::AppointmentsController < ApplicationController
   def index
     # TODO: return all values
+    @appointment = Appointment.all
+    render json: @appointment
     # TODO: return filtered values
-    head :ok
   end
 
   def create
