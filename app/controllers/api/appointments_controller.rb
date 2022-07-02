@@ -16,9 +16,9 @@ for filter: if past == 1, return the key [:past] appts where the
 class Api::AppointmentsController < ApplicationController
   def index
     # filter for past, future, and all appointments
-    if params[:past] === 1
+    if params[:past] === "1"
       @appointments = Appointment.where("start_time < ?", Time.zone.now)
-    elsif params [:past] === 0
+    elsif params [:past] === "0"
       @appointments = Appointment.where("start_time > ?", Time.zone.now)
     else
       @appointment = Appointment.all
@@ -29,7 +29,7 @@ class Api::AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(
-      patient_id: Patient.where(name: params[:patient][:name][:id]),
+      patient_id: Patient.where(name: params[:patient][:name]),
       doctor_id: params[:doctor][:id],
       start_time: params[:start_time],
       duration_in_minutes: params[:duration_in_minutes]
