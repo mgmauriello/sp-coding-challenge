@@ -1,0 +1,24 @@
+RSpec.describe Api::DoctorsController do
+
+  describe "#index" do
+    it "returns json data" do
+      get :index
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "GET /api/doctors", type: :request do
+    before do
+      5.times do
+        FactoryBot.create(:doctor)
+      end
+    end
+
+    it 'returns all doctors without appointments' do
+      get '/api/doctors'
+      expect(response).to have_http_status(:success)
+      # check to ensure correct number of results return
+      expect(JSON.parse(response.body).size).to eq(5)
+    end
+  end
+end
