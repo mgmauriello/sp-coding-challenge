@@ -1,6 +1,6 @@
 class Api::AppointmentsController < ApplicationController
   def index
-    #new array to hold created appointments
+    #new array to hold appointments
     @appointments = []
 
     # filter for past, future appointments
