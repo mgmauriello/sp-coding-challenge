@@ -8,14 +8,12 @@ class Api::AppointmentsController < ApplicationController
       appointments = Appointment.where("start_time < ?", Time.zone.now)
     elsif params[:past] == "0"
       appointments = Appointment.where("start_time > ?", Time.zone.now)
-
     #  paginated appointments
     elsif params[:page] && params[:length]
       limit = params[:length]
-      offset = params[:page] - 1 * params[:length]
+      offset = params[:page]
       appointments = Appointment.limit(limit).offset(offset)
-
-    # return all scheduled appointments
+    # else return all scheduled appointments
     else
       appointments = Appointment.all
     end
@@ -31,7 +29,9 @@ class Api::AppointmentsController < ApplicationController
         duration_in_minutes: ap.duration_in_minutes
       })
     end
+
     render json: @appointments
+
   end
 
   def create

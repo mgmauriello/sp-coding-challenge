@@ -7,6 +7,26 @@ RSpec.describe Api::AppointmentsController do
     end
   end
 
+  # describe "API appointments", type: :request do
+  #   describe "POST /api/appointments" do
+  #     it 'create new appointment' do
+  #       expect{
+  #         post '/api/appointments', params: {
+  #           "patient": {
+  #             "name": FactoryBot.create(:patient)
+  #           },
+  #           "doctor": {
+  #             "id": FactoryBot.create(:doctor).id
+  #           },
+  #           "start_time": "2023-10-22T00:00:00.000Z",
+  #           "duration_in_minutes": 50
+  #         }
+  #       }.to change {Appointment.count}.from(0).to(1)
+  #       expect(response).to have_http_status(:created)
+  #     end
+  #   end
+  # end
+
   describe "GET /api/appointments", type: :request do
     before do
       5.times do
@@ -20,29 +40,6 @@ RSpec.describe Api::AppointmentsController do
       # check to ensure correct number of results return
       expect(JSON.parse(response.body).length).to eq(5)
     end
-    # it 'returns subset of appointments due to past params: past' do
-    #   get '/api/appointments', params: {past: 1}
-    #   expect(response).to have_http_status(:success)
-    #   expect(JSON.parse(response.body).size).to eq(5)
-    # end
-
-    # it 'returns subset of appointments due to past params: future' do
-    #   get '/api/appointments', params: {past: 0}
-    #   expect(response).to have_http_status(:success)
-    #   expect(JSON.parse(response.body).size).to eq(0)
-    # end
-
-    # it 'returns subset of appointments due to pagination: length only' do
-    #   get '/api/appointments', params: {length: 4}
-    #   expect(response).to have_http_status(:success)
-    #   expect(JSON.parse(response.body).size).to eq(4)
-    # end
-
-    # it 'returns subset of appointments due to pagination: length and page' do
-    #   get '/api/appointments', params: {length: 4, page: 2}
-    #   expect(response).to have_http_status(:success)
-    #   expect(JSON.parse(response.body).size).to eq(3)
-    # end
   end
 
 end
