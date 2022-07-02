@@ -16,6 +16,7 @@ Appointment.destroy_all
   )
 
   10.times do
+    # create 10 patients per doctor
     patient = Patient.create(
       doctor_id: doctor.id,
       name: Faker::Name.unique.name
@@ -25,7 +26,7 @@ Appointment.destroy_all
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,
-        start_time: Time.zone.now + rand( 60 * 60 * 24 * 365 * 2),
+        start_time: Faker::Date.between(from:Time.zone.now, to: 90.days.from_now),
         duration_in_minutes: 50
       )
     end
@@ -34,7 +35,7 @@ Appointment.destroy_all
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,
-        start_time: Time.zone.now - rand( 60 * 60 * 24 * 365 * 2),
+        start_time: Faker::Date.between(from: 90.days.ago, to: Time.zone.now),
         duration_in_minutes: 50
       )
       end
