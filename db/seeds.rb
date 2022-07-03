@@ -28,7 +28,7 @@ Appointment.destroy_all
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,
-        start_time: Faker::Time.backward(days: 90, period: :morning, format: :long),
+        start_time: Faker::Time.backward(days: 90, period: :day, format: :long),
         duration_in_minutes: 50
       )
     end
@@ -38,7 +38,7 @@ Appointment.destroy_all
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,
-        start_time: Faker::Time.forward(days: 90,  period: :evening, format: :long),
+        start_time: Faker::Time.forward(days: 90,  period: :day, format: :long),
         duration_in_minutes: 50
       )
     end
