@@ -3,9 +3,10 @@ class Api::AppointmentsController < ApplicationController
     #new array to hold appointments
     @appointments = []
 
-    # filter for past, future appointments
+    # filter for past appointments
     if params[:past] == "1"
       appointments = Appointment.where("start_time < ?", Time.zone.now)
+    # filter for future appointments
     elsif params[:past] == "0"
       appointments = Appointment.where("start_time > ?", Time.zone.now)
     #  paginated appointments

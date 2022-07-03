@@ -1,0 +1,3 @@
+# to ignore log and tmp files
+/log/*
+/tmp/*
