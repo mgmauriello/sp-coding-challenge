@@ -1,2 +1,2 @@
-# to ignore log and tmp files
 /tmp/*
+/log/*
