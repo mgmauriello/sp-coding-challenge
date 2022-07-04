@@ -11,20 +11,19 @@ Patient.destroy_all
 Appointment.destroy_all
 
 10.times do
- # create 10 unique doctors
   doctor = Doctor.create(
     name: Faker::Name.unique.name
   )
 
   10.times do
-    # create 10 patients per doctor
+    # patients per doctor
     patient = Patient.create(
       doctor_id: doctor.id,
       name: Faker::Name.unique.name
     )
 
+    # appointment per patient
      5.times do
-      # create 5 appointments per patient in the past
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,
@@ -34,7 +33,6 @@ Appointment.destroy_all
     end
 
     5.times do
-      # create 5 appointments per patient in the future
       Appointment.create(
         patient_id: patient.id,
         doctor_id: patient.doctor_id,

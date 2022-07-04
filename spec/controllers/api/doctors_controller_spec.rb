@@ -17,7 +17,6 @@ RSpec.describe Api::DoctorsController do
     it 'returns all doctors without appointments' do
       get '/api/doctors'
       expect(response).to have_http_status(:success)
-      # check to ensure correct number of results return
       expect(JSON.parse(response.body).size).to eq(5)
     end
   end

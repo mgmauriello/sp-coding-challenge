@@ -1,11 +1,11 @@
 class Api::AppointmentsController < ApplicationController
   def index
-    #new array to hold appointments
     @appointments = []
 
-    # filter for past, future appointments
+    # filter for past appointments
     if params[:past] == "1"
       appointments = Appointment.where("start_time < ?", Time.zone.now)
+    # filter for future appointments
     elsif params[:past] == "0"
       appointments = Appointment.where("start_time > ?", Time.zone.now)
     #  paginated appointments
@@ -13,12 +13,11 @@ class Api::AppointmentsController < ApplicationController
       limit = params[:length]
       offset = params[:page]
       appointments = Appointment.limit(limit).offset(offset)
-    # else return all scheduled appointments
     else
       appointments = Appointment.all
     end
 
-    #push each appointment into the new array
+    # push each appointment into the new array
     appointments.each do |ap|
       @appointments.push({
         id: ap.id,
@@ -41,7 +40,6 @@ class Api::AppointmentsController < ApplicationController
       start_time: params[:start_time],
       duration_in_minutes: params[:duration_in_minutes]
     )
-    # save new appointment
     if appointment.save!
       render json: appointment, status: :created
     else
