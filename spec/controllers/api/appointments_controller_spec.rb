@@ -17,7 +17,6 @@ RSpec.describe Api::AppointmentsController do
     it "returns all appointments" do
       get "/api/appointments"
       expect(response).to have_http_status(:success)
-      # check to ensure correct number of results return
       expect(JSON.parse(response.body).length).to eq(5)
     end
   end
